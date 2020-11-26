@@ -5,6 +5,7 @@
 
 function loadWidget(config) {
 	let { waifuPath, apiPath, cdnPath } = config;
+	console.log(config)
 	let useCDN = false, modelList;
 	if (typeof cdnPath === "string") {
 		useCDN = true;
@@ -162,9 +163,10 @@ function loadWidget(config) {
 			modelTexturesId = localStorage.getItem("modelTexturesId");
 		if (modelId === null) {
 			// 首次访问加载 指定模型 的 指定材质
-			modelId = 1; // 模型 ID
-			modelTexturesId = 53; // 材质 ID
+			modelId = 5; // 模型 ID
+			modelTexturesId = 0; // 材质 ID
 		}
+		console.log('asdasd')
 		loadModel(modelId, modelTexturesId);
 		fetch(waifuPath)
 			.then(response => response.json())
@@ -207,6 +209,8 @@ function loadWidget(config) {
 	}
 
 	async function loadModel(modelId, modelTexturesId, message) {
+		console.log(modelId, modelTexturesId, message)
+
 		localStorage.setItem("modelId", modelId);
 		localStorage.setItem("modelTexturesId", modelTexturesId);
 		showMessage(message, 4000, 10);
@@ -227,6 +231,8 @@ function loadWidget(config) {
 			if (!modelList) await loadModelList();
 			const target = randomSelection(modelList.models[modelId]);
 			loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
+			console.log(`${cdnPath}model/${target}/index.json`)
+
 			showMessage("我的新衣服好看嘛？", 4000, 10);
 		} else {
 			// 可选 "rand"(随机), "switch"(顺序)
