@@ -297,6 +297,230 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiaoxiaohuayu.github.io/2020/12/08/Array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小小桦鱼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/08/Array/" itemprop="url">Array关于会影响原数组的API</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-08T15:25:17+08:00">
+                2020-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/12/08/Array/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/12/08/Array/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <table>
+<thead>
+<tr>
+<th>方法</th>
+<th align="center">说明</th>
+<th align="right">是否影响原数组</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>arr.filter(callback)</td>
+<td align="center">数组过滤，返回满足条件的元素组成的一个新数组</td>
+<td align="right">否</td>
+</tr>
+<tr>
+<td>arr.map(callback)</td>
+<td align="center">对数组每一项进行计算处理，返回一个新数组</td>
+<td align="right">否</td>
+</tr>
+<tr>
+<td>arr.some(function(item,index,array){})</td>
+<td align="center">依次执行数组元素，如果有一个元素满足条件，则表达式返回true，剩余的元素不会再执行检测。some()不会对空数组进行检测，不会改变原始数据。</td>
+<td align="right">否</td>
+</tr>
+<tr>
+<td>arr.every(function(item,index,array){})</td>
+<td align="center">该函数每一项都返回true，则返回true，否则返回false。</td>
+<td align="right">否</td>
+</tr>
+<tr>
+<td>arr.shift(item)</td>
+<td align="center">头部删除元素，返回被删除的元素，原始数组会改变</td>
+<td align="right">是</td>
+</tr>
+<tr>
+<td>arr.unshift(item)</td>
+<td align="center">头部添加元素，返回新数组的长度，原始数组会改变</td>
+<td align="right">是</td>
+</tr>
+<tr>
+<td>arr.pop()</td>
+<td align="center">返回被删除的元素</td>
+<td align="right">是</td>
+</tr>
+<tr>
+<td>arr.push()</td>
+<td align="center">尾部添加元素，返回新数组长度</td>
+<td align="right">是</td>
+</tr>
+<tr>
+<td>arr.slice(start,end)</td>
+<td align="center">剪切数组，含头不含尾 ,返回新的数组，不会改变原数组</td>
+<td align="right">否</td>
+</tr>
+<tr>
+<td>arr.split()</td>
+<td align="center">arr.split([ 起始位置 , 要删除元素的个数 , 要插入元素的值，可以写入多个值 ] )剪切数组/替 换/新增</td>
+<td align="right">否</td>
+</tr>
+<tr>
+<td>arr.sort()</td>
+<td align="center">会改变原数组</td>
+<td align="right">是</td>
+</tr>
+<tr>
+<td>arr.concat()</td>
+<td align="center">返回一个新数组，不会改变原数组</td>
+<td align="right">否</td>
+</tr>
+<tr>
+<td>arr.join(“连接符”)</td>
+<td align="center">将数组中每个元素转为字符串，用自定义的”连接符”连接每个元素,需要用变量借助</td>
+<td align="right">否</td>
+</tr>
+<tr>
+<td>splice()</td>
+<td align="center">方法向/从数组中添加/删除项目，然后返回被删除的项目。会改变原数组</td>
+<td align="right">是</td>
+</tr>
+<tr>
+<td>reverse()</td>
+<td align="center">方法将数组中元素的位置颠倒，并返回该数组。数组的第一个元素会变成最后一个，数组的最后一个元素变成第一个。该方法会改变原数组。</td>
+<td align="right">是</td>
+</tr>
+<tr>
+<td>fill()</td>
+<td align="center">方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。不包括终止索引。返回值修改后的数组</td>
+<td align="right">是</td>
+</tr>
+<tr>
+<td>copyWithin()</td>
+<td align="center">方法浅复制数组的一部分到同一数组中的另一个位置，并返回它，不会改变原数组的长度。返回值修改后的数组</td>
+<td align="right">是</td>
+</tr>
+</tbody></table>
+<p><code> //总结：会改变原数组的方法： arr.splice()  arr.reverse()  arr.fill()  arr.copyWithin()  arr.sort()  arr.push()  arr.pop()  arr.unshift()  arr.shift()   不改变数组： var arr = [] arr.slice() arr.map() arr.forEach() arr.every() arr.some() arr.filter() arr.reduce() arr.entries() arr.find() arr.concat()</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://xiaoxiaohuayu.github.io/2020/10/14/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -460,7 +684,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
